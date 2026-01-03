@@ -12,6 +12,7 @@ import {
   ServicesSection,
   ExperienceSection,
   PortfolioSection,
+  BlogsSection,
   TestimonialSection,
   ContactSection,
 } from "@/components/sections";
@@ -41,6 +42,9 @@ export default function Home() {
 
         {/* Portfolio Section - Projects showcase */}
         <PortfolioSection />
+
+        {/* Blogs Section - Medium articles */}
+        <BlogsSection />
 
         {/* Testimonial Section - Awards and recognition */}
         <TestimonialSection />

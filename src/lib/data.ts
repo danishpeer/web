@@ -38,7 +38,7 @@ export const navLinks = [
   { name: "Services", href: "#services" },
   { name: "Experience", href: "#experience" },
   { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "Blogs", href: "#blogs" },
 ];
 
 // ============================================
@@ -243,6 +243,15 @@ export const techStack = {
   cloud: ["AWS (EC2, S3, SQS)", "OCI Compute", "Docker", "Kubernetes"],
   ml: ["PyTorch", "TensorFlow", "Keras", "Hugging Face"],
   tools: ["Git", "GitLab CI", "ArgoCD", "Kafka"],
+};
+
+// ============================================
+// Blog Configuration
+// ============================================
+export const blogConfig = {
+  mediumUsername: "danishpeer", // Update with your Medium username
+  sectionTitle: "Latest Insights",
+  sectionDescription: "Thoughts on software engineering, and AI/ML, or just about anything else.",
 };
 
 // ============================================
