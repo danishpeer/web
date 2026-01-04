@@ -1,15 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Play } from "lucide-react";
+import dynamic from "next/dynamic";
 import { stats } from "@/lib/data";
+import aboutCodingAnimation from "@/components/animations/aboutCoding.json";
+
+// Dynamically import Lottie to avoid SSR issues
+const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
 
 /**
  * About Section Component
  * Layout matches design:
  * - Row 1: "About Me" label
  * - Row 2: Main heading (left) + short description (right) - same row
- * - Row 3: Large video/image (left ~60%) + Stats centered (right ~40%)
+ * - Row 3: Lottie animation (left ~60%) + Stats centered (right ~40%)
  */
 export default function AboutSection() {
   return (
@@ -51,37 +55,24 @@ export default function AboutSection() {
           </motion.p>
         </div>
 
-        {/* Row 3: Video + Stats - Grid layout, stats centered */}
+        {/* Row 3: Lottie Animation + Stats - Grid layout, stats centered */}
         <div className="mt-10 md:mt-14 grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-12 items-center">
-          {/* Left - Video/Image Card (takes 3 of 5 columns) */}
+          {/* Left - Lottie Animation (takes 3 of 5 columns) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:col-span-3 relative rounded-2xl overflow-hidden bg-muted group cursor-pointer"
+            className="md:col-span-3 relative"
           >
-            <div className="aspect-[16/9]">
-              {/* Placeholder for video thumbnail */}
-              <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center">
-                <div className="text-center">
-                  <span className="text-6xl">💻</span>
-                  <p className="mt-2 text-sm text-muted-foreground">
-                    Coding in action
-                  </p>
-                </div>
-              </div>
-
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-foreground text-background flex items-center justify-center shadow-lg group-hover:bg-foreground/90 transition-colors"
-                >
-                  <Play size={28} className="ml-1" />
-                </motion.div>
-              </div>
+            <div className="flex items-center justify-center">
+              <Lottie
+                animationData={aboutCodingAnimation}
+                loop={true}
+                autoplay={true}
+                className="w-full h-auto max-w-[500px] lg:max-w-[550px] xl:max-w-[500px] 2xl:max-w-[450px]"
+                style={{ filter: "grayscale(100%) contrast(1.1)" }}
+              />
             </div>
           </motion.div>
 

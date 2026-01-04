@@ -32,7 +32,7 @@ export default function ExperienceSection() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl md:text-4xl lg:text-5xl font-extralight leading-tight"
           >
-            A Yearly snapshot of my creative growth
+            A Yearly snapshot of my professional growth
           </motion.h2>
 
           <motion.p

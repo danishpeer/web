@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   SiGo,
   SiPython,
@@ -51,10 +51,17 @@ const logos = [
   { name: "TensorFlow", icon: SiTensorflow },
 ];
 
-// Create 3 copies for seamless loop
-const tripleLogos = [...logos, ...logos];
+// Create 2 copies for seamless loop
+const doubleLogos = [...logos, ...logos];
 
 export default function LogoMarquee() {
+  // Wait for client-side hydration to prevent mismatch
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="py-6 md:py-8 overflow-hidden">
       <div className="relative">
@@ -63,17 +70,15 @@ export default function LogoMarquee() {
         <div className="absolute right-0 top-0 bottom-0 w-16 md:w-24 bg-linear-to-l from-background to-transparent z-10 pointer-events-none" />
 
         {/* Marquee Container */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="flex animate-marquee hover:paused"
+        <div
+          className={`flex ${mounted ? "animate-marquee" : ""} hover:paused`}
+          style={{ opacity: mounted ? 1 : 0, transition: "opacity 0.5s ease-in-out" }}
         >
-          {tripleLogos.map((logo, index) => {
+          {doubleLogos.map((logo, index) => {
             const IconComponent = logo.icon;
             return (
               <div
-                key={`${logo.name}-${index}`}
+                key={`logo-${index}`}
                 className="flex items-center justify-center mx-3 md:mx-4 shrink-0"
               >
                 <div className="flex items-center gap-3 md:gap-4 px-7 md:px-10 py-4 rounded-full bg-neutral-100 hover:bg-neutral-200/80 transition-colors cursor-default">
@@ -85,7 +90,7 @@ export default function LogoMarquee() {
               </div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
