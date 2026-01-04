@@ -14,6 +14,17 @@ const nextConfig: NextConfig = {
         hostname: "miro.medium.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "medium.com",
+        pathname: "/**",
+      },
+      {
+        // Wildcard for all Medium subdomains
+        protocol: "https",
+        hostname: "**.medium.com",
+        pathname: "/**",
+      },
     ],
   },
 };
