@@ -76,7 +76,7 @@ export default function LogoMarquee() {
                 key={`${logo.name}-${index}`}
                 className="flex items-center justify-center mx-3 md:mx-4 shrink-0"
               >
-                <div className="flex items-center gap-3 md:gap-4 px-7 md:px-10 py-4 md:py-5 rounded-full bg-neutral-100 hover:bg-neutral-200/80 transition-colors cursor-default">
+                <div className="flex items-center gap-3 md:gap-4 px-7 md:px-10 py-4 rounded-full bg-neutral-100 hover:bg-neutral-200/80 transition-colors cursor-default">
                   <IconComponent className="w-6 h-6 md:w-7 md:h-7 text-neutral-700" />
                   <span className="text-base md:text-lg font-medium text-neutral-800 whitespace-nowrap">
                     {logo.name}

@@ -2,16 +2,18 @@
 
 import Image from "next/image";
 import { personalInfo } from "@/lib/data";
+import CodePipelineDecoration from "@/components/decorations/CodePipelineDecoration";
 
 /**
  * Hero Section Component
  * Mobile: Stacked layout - Image, Title, Tagline (centered)
  * Desktop: Split layout - Title left, Image+Tagline right
+ * Features meaningful decorative elements above the title
  */
 export default function HeroSection() {
   return (
     <section className="relative pt-24 md:pt-28 pb-12 md:pb-20 overflow-hidden">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Mobile Layout - Stacked (visible on screens below 768px) */}
         <div className="flex md:hidden flex-col items-center text-center">
           {/* Profile Image - Centered on mobile */}
@@ -34,14 +36,20 @@ export default function HeroSection() {
 
           {/* Tagline - Centered on mobile */}
           <p className="mt-6 text-sm leading-relaxed text-foreground/80 max-w-[280px]">
-            Hi, I&apos;m {personalInfo.name.split(' ')[0]}, A Software / ML Engineer Building Scalable Deep Tech Solutions.
+            Hi, I&apos;m {personalInfo.name.split(" ")[0]}, A Software / ML
+            Engineer Building Scalable Deep Tech Solutions.
           </p>
         </div>
 
         {/* Desktop Layout - Split with bottom alignment */}
         <div className="hidden md:flex items-end justify-between min-h-[50vh] lg:min-h-[55vh] xl:min-h-[50vh] max-w-6xl mx-auto">
           {/* Title - Left side, bottom-aligned with tagline */}
-          <div className="max-w-[55%] xl:max-w-[50%]">
+          <div className="max-w-[55%] xl:max-w-[50%] relative">
+            {/* Meaningful decorative element: Code brackets + connected nodes */}
+            <div className="absolute -top-28 lg:-top-36 xl:-top-40 left-0 w-[550px] lg:w-[650px] h-[120px] lg:h-[140px] pointer-events-none overflow-visible">
+              <CodePipelineDecoration />
+            </div>
+
             <h1 className="text-[clamp(4rem,9vw,8rem)] font-light leading-[0.9] tracking-[-0.02em]">
               Software
               <br />
@@ -65,7 +73,7 @@ export default function HeroSection() {
             {/* Tagline - Below image */}
             <div className="text-center mt-5 lg:mt-6">
               <p className="text-sm lg:text-[15px] leading-[1.75] text-foreground font-semibold">
-                Hi, I&apos;m {personalInfo.name.split(' ')[0]},
+                Hi, I&apos;m {personalInfo.name.split(" ")[0]},
               </p>
               <p className="text-sm lg:text-[15px] leading-[1.75] text-foreground font-semibold">
                 A Software / ML Engineer Building
