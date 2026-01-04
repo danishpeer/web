@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Terminal, Shield, Brain } from "lucide-react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { projects } from "@/lib/data";
@@ -74,7 +74,7 @@ export default function PortfolioSection() {
           {/* Left Arrow - height matches card image area for vertical centering */}
           <div 
             className="hidden md:flex items-center justify-center shrink-0"
-            style={{ height: 'calc(420px * 0.75)' }} /* Card image height: width * 3/4 aspect ratio */
+            style={{ height: 'calc(420px * 0.6)' }} /* Card image height: width * 10/16 aspect ratio */
           >
             <button
               onClick={() => scroll("left")}
@@ -103,61 +103,61 @@ export default function PortfolioSection() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="group relative shrink-0 w-[320px] md:w-[380px] lg:w-[420px] snap-start"
               >
-                <div className="relative overflow-hidden rounded-2xl aspect-[4/3] bg-neutral-100">
-                  {/* Project Image Placeholder */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center">
-                    <div className="text-center p-4">
-                      <span className="text-6xl md:text-7xl">
-                        {index === 0 ? "🤖" : index === 1 ? "🔐" : "🧠"}
-                      </span>
-                      <p className="mt-3 text-sm font-medium text-neutral-600">
-                        {project.title}
-                      </p>
+                <Link
+                  href={project.github || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="relative overflow-hidden rounded-2xl aspect-[16/10] bg-neutral-100">
+                    {/* Project Image Placeholder with Icon */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 to-neutral-200 flex items-center justify-center transition-transform duration-500 group-hover:scale-105">
+                      <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white/80 backdrop-blur-sm flex items-center justify-center shadow-sm">
+                        {index === 0 ? (
+                          <Terminal size={40} strokeWidth={1.5} className="text-neutral-600" />
+                        ) : index === 1 ? (
+                          <Shield size={40} strokeWidth={1.5} className="text-neutral-600" />
+                        ) : (
+                          <Brain size={40} strokeWidth={1.5} className="text-neutral-600" />
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Gradient overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                    {/* Arrow on hover */}
+                    <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background text-foreground flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
+                      <ArrowUpRight size={18} />
                     </div>
                   </div>
 
-                  {/* Hover overlay with details */}
-                  <div className="absolute inset-0 bg-foreground/95 opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-end p-5">
+                  {/* Project info below card */}
+                  <div className="mt-4 space-y-2">
                     {/* Tags */}
-                    <div className="flex flex-wrap gap-2 mb-3">
+                    <div className="flex flex-wrap gap-2">
                       {project.tags.slice(0, 3).map((tag) => (
                         <Badge
                           key={tag}
                           variant="secondary"
-                          className="bg-background/20 text-background border-none text-xs px-3 py-1 rounded-full"
+                          className="text-xs px-2 py-0.5 bg-neutral-200 text-neutral-600 rounded-full"
                         >
                           {tag}
                         </Badge>
                       ))}
                     </div>
 
-                    {/* Title and Arrow */}
-                    <div className="flex items-end justify-between">
-                      <div>
-                        <h3 className="text-lg font-medium text-background">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm text-background/60">
-                          {project.subtitle}
-                        </p>
-                      </div>
-                      <Link
-                        href={project.github || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-10 h-10 rounded-full bg-background text-foreground flex items-center justify-center hover:scale-110 transition-transform"
-                      >
-                        <ArrowUpRight size={18} />
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+                    {/* Title */}
+                    <h3 className="text-base font-medium line-clamp-2 group-hover:text-neutral-600 transition-colors">
+                      {project.title}
+                    </h3>
 
-                {/* Project title below card */}
-                <div className="mt-4">
-                  <h3 className="text-base font-medium">{project.title}</h3>
-                  <p className="text-sm text-muted-foreground">{project.subtitle}</p>
-                </div>
+                    {/* Subtitle */}
+                    <p className="text-sm text-muted-foreground line-clamp-1">
+                      {project.subtitle}
+                    </p>
+                  </div>
+                </Link>
               </motion.div>
             ))}
 
@@ -168,7 +168,7 @@ export default function PortfolioSection() {
           {/* Right Arrow - height matches card image area for vertical centering */}
           <div 
             className="hidden md:flex items-center justify-center shrink-0"
-            style={{ height: 'calc(420px * 0.75)' }} /* Card image height: width * 3/4 aspect ratio */
+            style={{ height: 'calc(420px * 0.6)' }} /* Card image height: width * 10/16 aspect ratio */
           >
             <button
               onClick={() => scroll("right")}

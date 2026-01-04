@@ -180,7 +180,7 @@ export const projects = [
       "A command-line AI coding assistant built with LangGraph and LangChain, enabling developers to interact with codebases through natural language. Features multi-provider LLM support, Human-in-the-Loop approval workflow, and intelligent task planning.",
     image: "/images/projects/velorum.png",
     tags: ["LangChain", "LangGraph", "Python", "LLM", "CLI"],
-    github: "https://github.com/danishpeer/velorum",
+    github: "https://github.com/danishpeer/velorum-agent",
     live: "",
     featured: true,
   },
