@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: "Danish Khursheed | Software Engineer",
   description:
     "Software Engineer specializing in scalable backend systems, AI/ML integration, and distributed architectures. Currently at Swiggy, building systems serving 14M+ users.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   keywords: [
     "Software Engineer",
     "Backend Developer",
