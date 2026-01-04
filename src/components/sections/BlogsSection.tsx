@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { useRef, useEffect, useState } from "react";
@@ -146,7 +145,12 @@ export default function BlogsSection() {
                   className="group relative shrink-0 w-[320px] md:w-[380px] lg:w-[420px] snap-start"
                 >
                   {/* Card */}
-                  <Link href={`/blog/${post.slug}`} className="block">
+                  <a
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
                     <div className="relative overflow-hidden rounded-2xl aspect-[16/10] bg-neutral-100">
                       {/* Blog Thumbnail */}
                       {post.thumbnail && post.thumbnail !== "/images/blog-placeholder.png" ? (
@@ -199,7 +203,7 @@ export default function BlogsSection() {
                         <span>{formatDate(post.pubDate)}</span>
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 </motion.article>
               ))}
 

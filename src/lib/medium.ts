@@ -6,14 +6,10 @@
 export interface MediumPost {
   id: string;
   title: string;
-  slug: string;
-  description: string;
-  content: string;
   pubDate: string;
   link: string;
   thumbnail: string;
   categories: string[];
-  author: string;
 }
 
 // Medium RSS feed URL - Update this with your Medium username
@@ -30,41 +26,6 @@ function extractThumbnail(content: string): string {
   }
   // Default placeholder if no image found
   return "/images/blog-placeholder.png";
-}
-
-/**
- * Extracts plain text description from HTML content
- */
-function extractDescription(content: string, maxLength: number = 160): string {
-  // Remove HTML tags
-  const plainText = content
-    .replace(/<[^>]+>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-  
-  // Truncate to maxLength
-  if (plainText.length > maxLength) {
-    return plainText.substring(0, maxLength).trim() + "...";
-  }
-  return plainText;
-}
-
-/**
- * Generates a URL-friendly slug from title
- */
-function generateSlug(title: string, guid: string): string {
-  // Extract the Medium post ID from the GUID (usually the last part of the URL)
-  const guidMatch = guid.match(/\/([^/]+)$/);
-  const postId = guidMatch ? guidMatch[1] : "";
-  
-  // Create slug from title
-  const titleSlug = title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "")
-    .substring(0, 50);
-  
-  return `${titleSlug}-${postId.substring(0, 8)}`;
 }
 
 /**
@@ -94,18 +55,13 @@ export async function fetchMediumPosts(): Promise<MediumPost[]> {
       pubDate: string;
       link: string;
       categories?: string[];
-      author?: string;
     }) => ({
       id: item.guid,
       title: item.title,
-      slug: generateSlug(item.title, item.guid),
-      description: extractDescription(item.content),
-      content: item.content,
       pubDate: item.pubDate,
       link: item.link,
       thumbnail: extractThumbnail(item.content),
       categories: item.categories || [],
-      author: item.author || MEDIUM_USERNAME,
     }));
 
     return posts;
@@ -114,20 +70,3 @@ export async function fetchMediumPosts(): Promise<MediumPost[]> {
     return [];
   }
 }
-
-/**
- * Fetches a single blog post by slug
- */
-export async function fetchMediumPostBySlug(slug: string): Promise<MediumPost | null> {
-  const posts = await fetchMediumPosts();
-  return posts.find((post) => post.slug === slug) || null;
-}
-
-/**
- * Gets all blog slugs for static generation
- */
-export async function getAllBlogSlugs(): Promise<string[]> {
-  const posts = await fetchMediumPosts();
-  return posts.map((post) => post.slug);
-}
-
