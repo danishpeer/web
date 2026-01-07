@@ -153,7 +153,7 @@ export default function BlogsSection() {
                   >
                     <div className="relative overflow-hidden rounded-2xl aspect-[16/10] bg-neutral-100">
                       {/* Blog Thumbnail */}
-                      {post.thumbnail && post.thumbnail !== "/images/blog-placeholder.png" ? (
+                      {post.thumbnail && !post.thumbnail.startsWith("https://medium.com/") ? (
                         <Image
                           src={post.thumbnail}
                           alt={post.title}
@@ -161,9 +161,12 @@ export default function BlogsSection() {
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-neutral-200 to-neutral-300 flex items-center justify-center">
-                          <span className="text-6xl">📝</span>
-                        </div>
+                        <Image
+                          src="/assets/blog-placeholder.jpg"
+                          alt="Blog placeholder"
+                          fill
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
                       )}
 
                       {/* Gradient overlay */}
